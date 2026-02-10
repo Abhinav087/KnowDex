@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+aiosqlite
+pydantic[email]
+pydantic-settings
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+google-genai
+groq
+pypdf
+python-dotenv
+alembic
