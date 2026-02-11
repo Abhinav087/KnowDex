@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine, Base
+from app.core.migrations import run_migrations
 from app.routers import auth, workspaces, papers, chat
 
-# Create all tables on startup
+# Run migrations first to update existing tables
+run_migrations(engine)
+
+# Create all tables on startup (only creates missing tables, not columns)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
