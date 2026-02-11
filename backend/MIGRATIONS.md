@@ -21,7 +21,7 @@ This project uses a simple migration system to handle database schema changes. T
 **Details**:
 - Column type: TEXT
 - Default value: "" (empty string)
-- Nullable: Yes
+- Nullable: Yes (SQLite doesn't enforce NOT NULL unless specified)
 
 ## For Developers
 
@@ -56,10 +56,12 @@ def run_migrations(engine: Engine):
 
 If you need to completely reset the database:
 
-**Windows**: Run `fix_db.bat`
-**Linux/Mac**: Run `./fix_db.sh`
+**Windows**: Run `fix_db.bat` (located in project root)
+**Linux/Mac**: Run `./fix_db.sh` (located in project root)
 
 This will delete the database file. The tables will be automatically recreated on next startup.
+
+**Note**: Resetting the database will delete all data. Use migrations instead when possible to preserve data.
 
 ## Troubleshooting
 
