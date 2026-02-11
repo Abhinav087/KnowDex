@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 
 interface LayoutProps {
@@ -8,23 +8,20 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, showSidebar = true }: LayoutProps) {
+    // Note: detailed sidebar state management would normally be lifted to context
+    // For now we assume a standard layout spacer
     return (
-        <div className="flex min-h-screen bg-surface-950 text-white selection:bg-primary-500/30">
+        <div className="flex min-h-screen bg-white dark:bg-surface-950 text-slate-900 dark:text-white transition-colors duration-200">
             {showSidebar && <Sidebar />}
+            
             <motion.main
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className={`flex-1 ${showSidebar ? 'ml-20 md:ml-[80px]' : ''} relative z-0 flex flex-col items-center w-full`}
+                transition={{ duration: 0.4 }}
+                className={`flex-1 relative z-0 flex flex-col items-center w-full pl-20 md:pl-[80px] transition-[padding] duration-300`}
             >
-                <div className="w-full h-full p-4 md:p-8 overflow-x-hidden">
+                <div className="w-full h-screen overflow-hidden flex flex-col">
                     {children}
-                </div>
-
-                {/* Background Gradients */}
-                <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-                    <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary-900/10 blur-[120px]" />
-                    <div className="absolute bottom-[0%] left-[0%] w-[40%] h-[40%] rounded-full bg-purple-900/10 blur-[100px]" />
                 </div>
             </motion.main>
         </div>

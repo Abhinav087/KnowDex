@@ -4,7 +4,30 @@
 
 @layer base {
   body {
-    @apply bg-surface-950 text-surface-100 font-sans antialiased overflow-hidden selection:bg-primary-500/30 selection:text-white;
+    @apply bg-white dark:bg-surface-950 text-slate-900 dark:text-surface-100 font-sans antialiased overflow-hidden selection:bg-primary-500/30 selection:text-white transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+  }
+  .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 dark:bg-slate-700 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-300 dark:bg-slate-600;
   }
 }
 
