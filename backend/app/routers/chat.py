@@ -33,10 +33,14 @@ def get_groq_response(prompt: str, context: str) -> str:
     return completion.choices[0].message.content
 
 
-def get_gemini_response(prompt: str, context: str) -> str:
+def get_gemini_response(prompt: str, context: str, model: str = "gemini-2.0-flash") -> str:
+    """
+    Get response from Gemini API.
+    Supports: gemini-2.0-flash, gemini-3.0, gemini-3.0-flash
+    """
     client = genai.Client(api_key=settings.GEMINI_API_KEY)
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model=model,
         contents=(
             f"You are an expert research assistant. Use this paper context to answer:\n\n"
             f"Paper Context:\n{context}\n\n"
@@ -118,8 +122,12 @@ async def chat(
 
     # Get AI response
     try:
-        if request.model == "gemini":
-            ai_text = get_gemini_response(request.message, context)
+        if request.model.startswith("gemini-"):
+            # Pass the full model name to Gemini
+            ai_text = get_gemini_response(request.message, context, request.model)
+        elif request.model == "gemini":
+            # Legacy support for "gemini" - use default 2.0-flash
+            ai_text = get_gemini_response(request.message, context, "gemini-2.0-flash")
         else:
             ai_text = get_groq_response(request.message, context)
     except Exception as e:

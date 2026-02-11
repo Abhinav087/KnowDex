@@ -269,13 +269,31 @@ export default function Workspace() {
                                         <HiLightningBolt /> Llama 3 70B
                                     </button>
                                     <button
-                                        onClick={() => setModel('gemini')}
+                                        onClick={() => setModel('gemini-2.0-flash')}
                                         className={clsx(
                                             "px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2",
-                                            model === 'gemini' ? "bg-blue-600 text-white shadow-md" : "text-surface-400 hover:text-white"
+                                            model === 'gemini-2.0-flash' ? "bg-blue-600 text-white shadow-md" : "text-surface-400 hover:text-white"
                                         )}
                                     >
-                                        <HiSparkles /> Gemini 2.0
+                                        <HiSparkles /> Gemini 2.0 Flash
+                                    </button>
+                                    <button
+                                        onClick={() => setModel('gemini-3.0')}
+                                        className={clsx(
+                                            "px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2",
+                                            model === 'gemini-3.0' ? "bg-purple-600 text-white shadow-md" : "text-surface-400 hover:text-white"
+                                        )}
+                                    >
+                                        <HiChip /> Gemini 3.0
+                                    </button>
+                                    <button
+                                        onClick={() => setModel('gemini-3.0-flash')}
+                                        className={clsx(
+                                            "px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-2",
+                                            model === 'gemini-3.0-flash' ? "bg-indigo-600 text-white shadow-md" : "text-surface-400 hover:text-white"
+                                        )}
+                                    >
+                                        <HiLightningBolt className="text-purple-400" /> Gemini 3.0 Flash
                                     </button>
                                 </div>
                             </div>
@@ -402,7 +420,7 @@ export default function Workspace() {
                                 </button>
                             </div>
                             <div className="text-center mt-3 text-xs text-surface-500 font-medium">
-                                Powered by Llama 3 & Gemini 2.0 • Knowdex AI Research Engine
+                                Powered by Llama 3, Gemini 2.0 & Gemini 3.0 • Knowdex AI Research Engine
                             </div>
                         </div>
                     </motion.div>
